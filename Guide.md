@@ -1,0 +1,87 @@
+# VB Setup
+
+* Download and install VirtualBox and extension pack from https://www.virtualbox.org/wiki/Downloads  
+* Create user on redhat.com and download RHEL 7.5 image from https://developers.redhat.com/products/rhel/download.  
+* Create 2 virtual machines  (build and stage) on VB using this image. Install as basic web server with 2048 MB RAM and 20 GB Disk.
+Creating root user is optional.  
+* For both VMs, enable 2 adapters: NAT + Host Only  
+* Under file -> host network manager, turn off DHCP Server.  
+
+# RHEL setup
+
+### Start the VM and type in command line:
+
+### vim /etc/sysconfig/network-scripts/ifcfg-enp0s3:  
+Add "" around the variables, change ONBOOT to "yes" and add ZONE=public.  
+
+### vim /etc/sysconfig/network-scripts/ifcfg-enp0s8:
+```
+DEVICE="enp0s8"  
+BOOTPROTO="static"  
+HWADDR (optional)  
+NM_CONTROLLER="yes"  
+ONBOOT="yes"  
+TYPE="Ethernet"  
+IPADDR="your_desired_ip_address (192.168.56.2)"  
+NETMASK="255.255.255.0"  
+ZONE=public  
+```
+```
+sudo service network restart
+```
+Check if correct with ifconfig and ping vg.no
+
+```
+subscription manager register --username "username" --password "password" --auto-attach (username and password for redhat user)
+
+sudo yum install openssh-server
+
+sudo yum install java-1.8.0-openjdk-devel
+```
+
+# Ubuntu setup
+
+* Install Linux shell for windows using this guide: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
+```
+mkdir .ssh  
+vim .ssh/config  
+```
+### Add users in config file:  
+Host build  
+  &nbsp;&nbsp;Hostname 192.168.25.2  
+  &nbsp;&nbsp;User pal  
+```
+ssh-keygen  
+ssh build  
+```
+If problem with ownership: chown 600 .ssh/config or chmod 600 .ssh/config  
+`ssh-copy-id` build to not have to enter password each time  
+
+# Jenkins
+
+### Install
+```
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+yum install jenkins
+```
+
+### Start/Stop
+```
+service jenkins start/stop/restart
+chkconfig jenkins on
+```
+
+### Firewall
+```
+firewall-cmd --permanent --new-service=jenkins
+firewall-cmd --permanent --service=jenkins --set-short="Jenkins Service Ports"
+firewall-cmd --permanent --service=jenkins --set-description="Jenkins service firewalld port exceptions"
+firewall-cmd --permanent --service=jenkins --add-port=8080/tcp
+firewall-cmd --permanent --add-service=jenkins
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --reload
+```
+
+
+Jenkins URL: http://192.168.56.2:8080/
