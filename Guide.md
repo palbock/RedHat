@@ -12,9 +12,10 @@ Creating root user is optional.
 ### Start the VM and type in command line:
 
 ### vim /etc/sysconfig/network-scripts/ifcfg-enp0s3:  
-Add "" around the variables, change ONBOOT to "yes" and add ZONE=public.  
+Add `""` around the variables, change `ONBOOT` to `"yes"` and add `ZONE=public`.  
 
 ### vim /etc/sysconfig/network-scripts/ifcfg-enp0s8:
+Should look like this:
 ```
 DEVICE="enp0s8"  
 BOOTPROTO="static"  
@@ -26,11 +27,11 @@ IPADDR="your_desired_ip_address (192.168.56.2)"
 NETMASK="255.255.255.0"  
 ZONE=public  
 ```
-```
-sudo service network restart
-```
-Check if correct with ifconfig and ping vg.no
+Run `sudo service network restart`
 
+Check if correct with `ifconfig` and `ping vg.no`.
+
+Run the following commands:
 ```
 subscription manager register --username "username" --password "password" --auto-attach (username and password for redhat user)
 
@@ -41,11 +42,13 @@ sudo yum install java-1.8.0-openjdk-devel
 sudo yum install git
 ```
 
-If any installs fail, run `sudo yum update`
+If any installs fail, run `sudo yum update` first.
 
 # Ubuntu setup
 
 * Install Linux shell for windows using this guide: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
+
+Run
 ```
 mkdir .ssh  
 vim .ssh/config  
@@ -54,12 +57,14 @@ vim .ssh/config
 Host build  
   &nbsp;&nbsp;Hostname 192.168.25.2  
   &nbsp;&nbsp;User pal  
+  
+Run
 ```
 ssh-keygen  
 ssh build  
 ```
 If problem with ownership: chown 600 .ssh/config or chmod 600 .ssh/config  
-`ssh-copy-id` build to not have to enter password each time  
+Run `ssh-copy-id` build after logging in with password to not have to enter password each time if you have created an admin user.  
 
 # Jenkins
 
@@ -96,10 +101,10 @@ It may be necessary to add the path to the git executable to Jenkins configurati
 * Install Maven on Linux VM: https://tecadmin.net/install-apache-maven-on-centos/  
 * Go to configure tab on your project in Jenkins.  
 * Add build step: "Invoke top-level maven targets"
-* Enter "test"  
+* Enter "clean test"  
 
-* Add post-build step: "Publish JUnit test result report"  
-* Enter `target/surefire-reports/*.xml`
+* Add post-build step: "Publish JUnit test result report".   
+* Enter `target/surefire-reports/*.xml`.
 
 # Nexus
 
