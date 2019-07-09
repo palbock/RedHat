@@ -94,7 +94,7 @@ It may be necessary to add the path to the git executable to Jenkins configurati
 ### Running JUnit tests on Jenkins
 
 * Install Maven on Linux VM: https://tecadmin.net/install-apache-maven-on-centos/  
-* Go to configure tab on your build in Jenkins.  
+* Go to configure tab on your project in Jenkins.  
 * Add build step: "Invoke top-level maven targets"
 * Enter "test"  
 
