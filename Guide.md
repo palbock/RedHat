@@ -168,3 +168,28 @@ firewall-cmd --reload
 ### Alternativ måte
 
 https://help.sonatype.com/learning/repository-manager-3/first-time-installation-and-setup/lesson-1%3A--installing-and-starting-nexus-repository-manager
+
+https://www.youtube.com/watch?v=qbO4MTESiJQ
+
+* Create a repository in Nexus (your_linux_vm_ip:8081) 
+* In configure project in Jenkins, add Maven goal `clean test install package deploy`.  
+* In project pom.xml add
+```
+<distributionManagement>  
+&nbsp;&nbsp;<snapshotRepository>  
+&nbsp;&nbsp;&nbsp;<id>deployment</id>  
+&nbsp;&nbsp;&nbsp;<name>Internal snapshot</name>  
+&nbsp;&nbsp;&nbsp;<url>http://your_linux_vm_ip:8081/repository/JENKINSTEST-SNAP/</url>  
+&nbsp;&nbsp;</snapshotRepository>  
+</distributionManagement>  
+```
+* In linux shell: `vim /etc/maven/settings.xml`.  
+* Find servers section and add new server:
+```
+<server>  
+&nbsp;&nbsp;<id>deployment</id>  
+&nbsp;&nbsp;<username>admin</username>  
+&nbsp;&nbsp;<password>your_nexus_password</password>  
+</server>  
+```
+
