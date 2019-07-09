@@ -176,20 +176,20 @@ https://www.youtube.com/watch?v=qbO4MTESiJQ
 * In project pom.xml add
 ```
 <distributionManagement>  
-&nbsp;&nbsp; <snapshotRepository>  
-&nbsp;&nbsp;&nbsp; <id>deployment</id>  
-&nbsp;&nbsp;&nbsp; <name>Internal snapshot</name>  
-&nbsp;&nbsp;&nbsp; <url>http://your_linux_vm_ip:8081/repository/JENKINSTEST-SNAP/</url>  
-&nbsp;&nbsp; </snapshotRepository>  
+  <snapshotRepository>  
+    <id>deployment</id>  
+    <name>Internal snapshot</name>  
+    <url>http://your_linux_vm_ip:8081/repository/JENKINSTEST-SNAP/</url>  
+  </snapshotRepository>  
 </distributionManagement>  
 ```
 * In linux shell: `vim /etc/maven/settings.xml`.  
 * Find servers section and add new server:
 ```
 <server>  
-&nbsp;&nbsp; <id>deployment</id>  
-&nbsp;&nbsp; <username>admin</username>  
-&nbsp;&nbsp; <password>your_nexus_password</password>  
+  <id>deployment</id>  
+  <username>admin</username>  
+  <password>your_nexus_password</password>  
 </server>  
 ```
 
