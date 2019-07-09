@@ -179,8 +179,13 @@ https://www.youtube.com/watch?v=qbO4MTESiJQ
   <snapshotRepository>  
     <id>deployment</id>  
     <name>Internal snapshot</name>  
-    <url>http://your_linux_vm_ip:8081/repository/JENKINSTEST-SNAP/</url>  
+    <url>http://your_linux_vm_ip:8081/repository/your_snapshot_repo/</url>  
   </snapshotRepository>  
+  <repository>  
+    <id>deployment</id>  
+    <name>Internal snapshot</name>  
+    <url>http://your_linux_vm_ip:8081/repository/your_release_repo/</url>  
+  </repository>  
 </distributionManagement>  
 ```
 * In linux shell: `vim /etc/maven/settings.xml`.  
