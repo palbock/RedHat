@@ -37,7 +37,11 @@ subscription manager register --username "username" --password "password" --auto
 sudo yum install openssh-server
 
 sudo yum install java-1.8.0-openjdk-devel
+
+sudo yum install git
 ```
+
+If any installs fail, run `sudo yum update`
 
 # Ubuntu setup
 
@@ -83,5 +87,16 @@ firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 ```
 
+### Git
 
-Jenkins URL: http://192.168.56.2:8080/
+It may be necessary to add the path to the git executable to Jenkins configuration. Go to "Global tool configuration", "Git" and add the path. Should be `/usr/bin/git` by default.
+
+### Running JUnit tests on Jenkins
+
+* Install Maven on Linux VM: https://tecadmin.net/install-apache-maven-on-centos/  
+* Go to configure tab on your build in Jenkins.  
+* Add build step: "Invoke top-level maven targets"
+* Enter "test"  
+
+* Add post-build step: "Publish JUnit test result report"  
+* Enter `target/surefire-reports/*.xml`
