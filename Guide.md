@@ -164,3 +164,7 @@ firewall-cmd --permanent --add-service=nexus
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 ```
+
+## Alternativ måte
+
+https://help.sonatype.com/learning/repository-manager-3/first-time-installation-and-setup/lesson-1%3A--installing-and-starting-nexus-repository-manager
