@@ -100,3 +100,62 @@ It may be necessary to add the path to the git executable to Jenkins configurati
 
 * Add post-build step: "Publish JUnit test result report"  
 * Enter `target/surefire-reports/*.xml`
+
+# Nexus
+
+### Install
+Download and extract _Nexus_. Create and set a _nexus_-user as owner for the directories.
+```
+wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+tar -xvzf nexus-3.17.0-01-unix.tar.gz -C /usr/local/
+ln -s /usr/local/nexus-3.17.0-01 /usr/local/nexus
+adduser nexus
+chown -R nexus:nexus /usr/local/nexus-3.17.0-01
+chown -h nexus:nexus /usr/local/nexus
+```
+
+Run _Nexus_ as the created _nexus_-user. Uncomment and append user in _bin/nexus.rc_.
+```
+run_as_user="nexus"
+```
+
+Change to the following configurations in _bin/nexus.vmoptions_.
+```
+-XX:LogFile=/var/log/nexus/jvm.log
+-Dkaraf.data=/nexus/data
+-Djava.io.tmpdir=/nexus/tmp
+```
+
+Create directories to match configurations from _bin/nexus.vmoptions_.
+```
+install -d -o nexus -g nexus -m 750 /var/log/nexus
+install -d -o nexus -g nexus -m 750 /nexus
+install -d -o nexus -g nexus -m 750 /nexus/data
+install -d -o nexus -g nexus -m 750 /nexus/tmp
+```
+
+### Java 1.8
+_This step is only necessary if Java 1.8 is not installed or not found by Nexus._
+Nexus needs to run on _Java 1.8_.. Uncomment and use override in _bin/nexus_.
+```
+INSTALL4J_JAVA_HOME_OVERRIDE=/usr/lib/jvm/java-1.8.0-openjdk
+```
+
+### Start/Stop
+```
+ln -s /usr/local/nexus/bin/nexus /etc/init.d/nexus
+chkconfig --add nexus
+chkconfig --levels 345 nexus on
+service nexus start
+```
+
+### Firewall
+```
+firewall-cmd --permanent --new-service=nexus
+firewall-cmd --permanent --service=nexus --set-short="Nexus Service Ports"
+firewall-cmd --permanent --service=nexus --set-description="Nexus service firewalld port exceptions"
+firewall-cmd --permanent --service=nexus --add-port=8081/tcp
+firewall-cmd --permanent --add-service=nexus
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --reload
+```
