@@ -104,7 +104,7 @@ It may be necessary to add the path to the git executable to Jenkins configurati
 * Enter "clean test"  
 
 * Add post-build step: "Publish JUnit test result report".   
-* Enter `target/surefire-reports/*.xml`.
+* Enter `**target/surefire-reports/*.xml`.
 
 # Nexus
 
