@@ -210,3 +210,8 @@ Run:
 ```  
 Navigate to `sonarqube-7.9/bin/[OS]` and run `sudo ./sonar.sh console run`.
 
+
+
+### Deploy pipeline
+
+https://dzone.com/articles/building-a-continuous-delivery-pipeline-using-jenk
