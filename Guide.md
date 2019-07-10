@@ -198,3 +198,15 @@ https://www.youtube.com/watch?v=qbO4MTESiJQ
 </server>  
 ```
 
+# Sonarqube
+
+Must run on java 11: `sudo yum install java-11-openjdk-devel `.  
+To set default java version: `sudo update-alternatives --config java`.  
+
+Run:
+```
+`sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.9.zip`
+`sudo unzip sonarqube-7.9.zip`
+```  
+Navigate to `sonarqube-7.9/bin/[OS]` and run `sudo ./sonar.sh console run`.
+
