@@ -94,7 +94,7 @@ firewall-cmd --reload
 
 ### Git
 
-It may be necessary to add the path to the git executable to Jenkins configuration. Go to "Global tool configuration", "Git" and add the path. Should be `/usr/bin/git` by default.
+It may be necessary to add the path to the git executable to Jenkins configuration. Go to "Global tool configuration", "Git" and add the path. Should be `/usr/bin/git` by default. Choose "Poll SCM" for building when a change is detected in repo.
 
 ### Running JUnit tests on Jenkins
 
