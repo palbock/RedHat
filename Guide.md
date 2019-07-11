@@ -198,7 +198,7 @@ https://www.youtube.com/watch?v=qbO4MTESiJQ
 </server>  
 ```
 
-OBS! Using `wget` to download artifacts from Nexus does not work on Nexus 3, only Nexus 2. 
+NB! Using `wget` to download artifacts from Nexus does not work on Nexus 3, only Nexus 2. 
 
 # Sonarqube
 
