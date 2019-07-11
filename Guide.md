@@ -203,6 +203,8 @@ NB! Using `wget` to download artifacts from Nexus does not work on Nexus 3, only
 
 To get list of items in repository: `curl --user username:password -X GET "http://your_ip:your_port/service/rest/v1/search?repository=your_repository" -H "accept: application/json"`. This will also include a downloadURL which can be used with `wget` to download the .jar.
 
+`curl --user admin:Heisann123 -J -L "http://192.168.56.2:8081/service/rest/v1/search/assets/download?repository=JENKINSTEST-SNAP&group=TestingJenkins&name=testingjenkins&maven.classifier=&maven.extension=jar&sort=version" -o tt.jar` bør kunne laste ned filen, men virker som den kutter av underveis, den nedlastede filen blir veldig liten.
+
 ```diff
 - BRUK SSH ISTEDET FOR BRUKERNAVN PASSORD
 ```
