@@ -198,6 +198,8 @@ https://www.youtube.com/watch?v=qbO4MTESiJQ
 </server>  
 ```
 
+OBS! Using `wget` to download artifacts from Nexus does not work on Nexus 3, only Nexus 2. 
+
 # Sonarqube
 
 Must run on java 11: `sudo yum install java-11-openjdk-devel `.  
