@@ -197,8 +197,15 @@ https://www.youtube.com/watch?v=qbO4MTESiJQ
   <password>your_nexus_password</password>  
 </server>  
 ```
+### Downloading artifacts
 
-NB! Using `wget` to download artifacts from Nexus does not work on Nexus 3, only Nexus 2. 
+NB! Using `wget` to download artifacts from Nexus does not work on Nexus 3, only Nexus 2.
+
+To get list of items in repository: `curl --user username:password -X GET "http://your_ip:your_port/service/rest/v1/search?repository=your_repository" -H "accept: application/json"`. This will also include a downloadURL which can be used with `wget` to download the .jar.
+
+```diff
+- BRUK SSH ISTEDET FOR BRUKERNAVN PASSORD
+```
 
 # Sonarqube
 
