@@ -1,0 +1,11 @@
+build2:
+  description: Test-app build2 machine
+  hostname: 192.168.56.2
+  nodename: build2
+  osArch: x86_64
+  osFamily: unix
+  osName: Red Hat Enterprise Linux
+  osVersion: 7.5
+  tags: 'test-app,build'
+  username: root
+  ssh-key-storage-path: keys/nodes/build2
