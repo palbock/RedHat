@@ -7,5 +7,5 @@ build2:
   osName: Red Hat Enterprise Linux
   osVersion: 7.5
   tags: 'test-app,build'
-  username: root
+  username: root@localhost.localdomain
   ssh-key-storage-path: keys/nodes/build2
