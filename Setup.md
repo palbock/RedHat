@@ -195,13 +195,13 @@ URL to `http://192.168.56.2:9000` and add the authentication token created earli
 
 Install the following list of plugins, and all the recommended plugins, for Jenkins.
 
-..* Nexus Artifact Uploader
-..*Nexus Platform Plugin
-..* Pipeline
-..* Pipeline Utility Steps
-..* Publish Over SSH
-..* SonarQube Scanner for Jenkins
-..* SSH Plugin
+* Nexus Artifact Uploader
+*Nexus Platform Plugin
+* Pipeline
+* Pipeline Utility Steps
+* Publish Over SSH
+* SonarQube Scanner for Jenkins
+* SSH Plugin
 
 # Jenkins pipeline
 
@@ -209,5 +209,5 @@ Install the following list of plugins, and all the recommended plugins, for Jenk
 instructions.
 
 ## Pipeline problems
-..* The *Jenkins* pipeline is missing the step of deploying the build to a runtime environment. The SSH and *Nexus* plugins could be used for this solution.
-..* The *waitForQualityGate* part of the SonarQube stage does not work well without a sleep first. Could be caused by webhooks that is not working properly.
+* The *Jenkins* pipeline is missing the step of deploying the build to a runtime environment. The SSH and *Nexus* plugins could be used for this solution.
+* The *waitForQualityGate* part of the SonarQube stage does not work well without a sleep first. Could be caused by webhooks that is not working properly.
