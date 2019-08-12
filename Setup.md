@@ -23,7 +23,8 @@ Sometimes, due to plugins, *Jenkins* installation needs to use Java 8. This can 
 service jenkins start
 service jenkins stop
 service jenkins restart
-service jenkins status```
+service jenkins status
+```
 
 ## Open firewall  
 ```
