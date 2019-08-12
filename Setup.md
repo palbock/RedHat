@@ -66,7 +66,7 @@ install -d -o nexus -g nexus -m 750 /nexus/tmp
 ```
 
 Change the following jvm configurations.  
-**/usr/local/nexus/bin/nexus.vomoptions**  
+**/usr/local/nexus/bin/nexus.vomoptions**
 ```
 /usr/local/nexus/bin/nexus.vmoptions
 -XX:LogFile=/var/log/nexus/jvm.log
