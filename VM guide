@@ -39,9 +39,9 @@ IPADDR="192.168.56.2"
 NETMASK="255.255.255.0"
 ```
 
-4. Install Java 8 and 11, git and Maven.
+**4.** Install Java 8 and 11, git and Maven.
 
-5. Test the installations by cloning the following git repository.
+**5.** Test the installations by cloning the following git repository.
 
 ```
 git clone https://github.com/adrianhj88/test-app
