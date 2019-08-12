@@ -8,7 +8,7 @@ It is also possible to clone the first image and change MAC-addresses afterwards
 Be sure to give your VM enough memory (>4GB) as it will kill some processes if it does not have enough.
 
 *NOTE: If using RHEL, perform step 2 and 3 first.*  
-Enable repos after installing the image. Only necessary for Red Hat Enterprise Linux.
+Enable repos after installing the image. Only necessary for Red Hat Enterprise Linux.  
 `subscription-manager register --username <username> --password <password> --auto-attach`
 
 **2.** Enable two network interfaces in VirtualBox settings for each virtual machine, NAT and Host-only Adapter. This will provide internet access to the virtual machines via NAT and direct communication without port forwarding via Host-only Adapter from the host machine.
@@ -26,8 +26,8 @@ DEVICE="enp0s3"
 ONBOOT="yes"
 ```
 
-Increment the following IPADDR for the second virtual machine.
-**/etc/sysconfig/network-scripts/ifcfg-enp0s8*
+Increment the following IPADDR for the second virtual machine.  
+**/etc/sysconfig/network-scripts/ifcfg-enp0s8**
 ```
 DEVICE="enp0s8"
 BOOTPROTO="static"
