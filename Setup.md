@@ -211,3 +211,75 @@ instructions.
 ## Pipeline problems
 * The *Jenkins* pipeline is missing the step of deploying the build to a runtime environment. The SSH and *Nexus* plugins could be used for this solution.
 * The *waitForQualityGate* part of the SonarQube stage does not work well without a sleep first. Could be caused by webhooks that is not working properly.
+
+# Rundeck
+
+## Install
+```
+rpm -Uvh https://repo.rundeck.org/latest.rpm
+yum install rundeck
+```
+
+### Hostname
+Change hostname in _/etc/rundeck/rundeck-config.properties_.
+```
+grails.serverURL=http://192.168.56.2:4440
+```
+
+### Java 1.8
+_This step is only necessary if Java 1.8 is not default._
+Rundeck needs to run on _Java 1.8_.. Add the following in _/etc/rundeck/profile_, together with the other configured values.
+```
+JAVA_CMD="/usr/lib/jvm/java-1.8.0-openjdk/bin/java"
+```
+
+## Start, stop, restart and status
+```
+service rundeckd start
+service rundeckd stop
+service rundeckd restart
+service rundeckd status
+```
+
+## Firewall
+```
+firewall-cmd --permanent --new-service=rundeck
+firewall-cmd --permanent --service=rundeck --set-short="Rundeck Service Ports"
+firewall-cmd --permanent --service=rundeck --set-description="Rundeck service firewalld port exceptions"
+firewall-cmd --permanent --service=rundeck --add-port=4440/tcp
+firewall-cmd --permanent --add-service=rundeck
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --reload
+```
+
+## Change admin password
+Generate MD5 hash with provided _rundeck jar_.
+```
+java -jar /var/lib/rundeck/bootstrap/rundeck-3.0.23-20190619.war --encryptpwd Jetty
+```
+
+Use _MD5:\<MD5 hash\>_ output and replace admin user in _/etc/rundeck/realm.properties_. 
+```
+admin: MD5:<MD5 hash>,user,admin,architect,deploy,build
+```
+
+## Accessing Jenkins builds
+For Rundeck to access the Jenkins builds, Jenkins needs to use Matrix-based security with read-write permissions for anonymous users (or create a group for Rundeck user). After creating a job in Rundeck, add an 'Option' under 'Workflow', add `http://192.168.56.2:8080/plugin/rundeck/options/build?project=test-app&artifact=test-app.jar&limit=5&includeLastSuccessfulBuild=true&includeLastStableBuild=true` as a remoteURL.
+
+## Add a remote node and run a job on it
+The following steps will enable nodes in a project for jobs.
+
+* Goto: Settings (Cog wheel) -> Key Storage -> Add or Upload Key
+* Create key _nodes/stage_ with SSH access to stage machine (copy the entire /root/.ssh/id_rsa)
+* Goto: Projects -> New Project
+* Create a project
+* Goto: Project settings -> Edit nodes -> Add new node source -> URL Source
+* Use this URL: _htttps://raw.githubusercontent.com/adrianhj88/redhat/master/nodes.yaml_
+* Goto: Jobs -> Job Actions -> New Job
+* Set name and description, and add a command. E.g. _systemctl restart test-app_
+* Goto: Jobs -> <Name of new job> -> Run Job Now
+ 
+ ## Trigger Rundeck job from Jenkins
+ 
+ Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID.
+
