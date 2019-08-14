@@ -279,6 +279,12 @@ The following steps will enable nodes in a project for jobs.
 * Set name and description, and add a command. E.g. _systemctl restart test-app_
 * Goto: Jobs -> <Name of new job> -> Run Job Now
  
+ Steps used in workflow:  
+ * `sudo lsof -i:8082 -t | xargs -r sudo kill` to kill processes on port 8082 if exists
+ * `move` to execute move script
+ * `download` to execute download script
+ * `java -jar /nexus/artifacts/latest/test-app-*` to run latest .jar
+ 
  ## Trigger Rundeck job from Jenkins
  
  Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID.
