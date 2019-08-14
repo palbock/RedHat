@@ -289,3 +289,28 @@ The following steps will enable nodes in a project for jobs.
  
  Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID.
 
+# Add app as service
+Create */etc/systemd/system/appname.service*
+```
+[Unit]
+Description=test-app
+After=syslog.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/usr/local/intellij/test-app/target/test-app.jar
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+firewall-cmd --permanent --new-service=appname
+firewall-cmd --permanent --service=appname --set-short="appname Service Ports"
+firewall-cmd --permanent --service=appname --set-description="appname service firewalld port exceptions"
+firewall-cmd --permanent --service=appname --add-port=4440/tcp
+firewall-cmd --permanent --add-service=appname
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --reload
+```
