@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ -f /nexus/artifacts/latest/test-app-* ]; then
+ mv /nexus/artifacts/latest/test-app-* /nexus/artifacts/old-artifacts
+fi
