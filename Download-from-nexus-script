@@ -1,0 +1,35 @@
+#!/bin/sh
+
+groupId="no/ahj"
+artifactId="test-app"
+version="1.0-SNAPSHOT"
+nexusUser="admin"
+
+classifier=""
+type="jar"
+repo="test-app"                                                                                                                                                                                                                    
+# Nexus 3
+base="http://192.168.56.2:8081/repository/${repo}"
+
+if [[ $classifier != "" ]]; then
+  classifier="-${classifier}"
+fi
+
+# Read Password
+#echo -n Please enter password for user ${nexusUser}:
+#read -s password
+#echo
+password="admin"
+
+filename="${artifactId}-${version}${classifier}.${type}"
+
+if [[ "${version}" == "LATEST" || "${version}" == *SNAPSHOT* ]] ; then
+  if [[ "${version}" == "LATEST" ]] ; then
+    version=$(xmllint --xpath "string(//latest)" <(curl -s "${base}/${groupIdUrl}/${artifactId}/maven-metadata.xml"))
+  fi
+  timestamp=`curl -u ${nexusUser}:${password} -s "${base}/${groupId}/${artifactId}/${version}/maven-metadata.xml" | xmllint --xpath "string(//timestamp)" -`
+  buildnumber=`curl -u ${nexusUser}:${password} -s "${base}/${groupId}/${artifactId}/${version}/maven-metadata.xml" | xmllint --xpath "string(//buildNumber)" -`
+  wget --user ${nexusUser} --password ${password} -P /nexus/artifacts/latest "${base}/${groupId}/${artifactId}/${version}/${artifactId}-${version%-SNAPSHOT}-${timestamp}-${buildnumber}.${type}"                                  
+else
+  wget --user ${nexusUser} --password ${password} -P /nexus/artifacts/latest "${base}/${groupId}/${artifactId}/${version}/${artifactId}-${version}${classifier}.${type}"                                                           
+fi
