@@ -288,6 +288,52 @@ The following steps will enable nodes in a project for jobs.
  ## Trigger Rundeck job from Jenkins
  
  Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID.
+ 
+ ### Rundeck plugin
+* [Nexus3-Rundeck plugin info](https://docs.rundeck.com/plugins/nexus/2017/08/11/nexus3-options-provider.html)
+* [Nexus3-Rundeck plugin github](https://github.com/nongfenqi/nexus3-rundeck-plugin)
+* [Nexus3-Rundeck plugin github releases](https://github.com/nongfenqi/nexus3-rundeck-plugin/releases)
+
+Download plugin.
+```
+mkdir -p /usr/local/nexus/system/com/nongfenqi/nexus/plugin/1.0.1
+wget -O /usr/local/nexus/system/com/nongfenqi/nexus/plugin/1.0.1/nexus3-rundeck-plugin-1.0.1.jar https://github.com/nongfenqi/nexus3-rundeck-plugin/releases/download/1.0.1/nexus3-rundeck-plugin-1.0.1.jar
+```
+
+Update configuration files.
+```
+echo "bundle.mvn\:com.nongfenqi.nexus.plugin/nexus3-rundeck-plugin/1.0.1 = mvn:com.nongfenqi.nexus.plugin/nexus3-rundeck-plugin/1.0.1" >> /usr/local/nexus/etc/karaf/profile.cfg
+echo "reference\:file\:com/nongfenqi/nexus/plugin/1.0.1/nexus3-rundeck-plugin-1.0.1.jar = 200" >> /usr/local/nexus/etc/karaf/startup.properties
+```
+
+Restart Nexus
+```
+service nexus restart
+```
+
+The plugin provides the following new HTTP resources :
+
+- `http://192.168.56.2:8081/service/rest/rundeck/maven/options/version` : return a json array with the version of the matching artifacts.
+  Parameters (all optional) :
+  - `r` : repository ID to search in (null for searching in all indexed repositories)
+  - `g` : groupId of the artifacts to match
+  - `a` : artifactId of the artifacts to match
+  - `p` : packaging of the artifacts to match ('jar', 'war', etc)
+  - `c` : classifier of the artifacts to match ('sources', 'javadoc', etc)
+  - `l` : limit - max number of results to return, default value is 10
+
+- `http://192.168.56.2:8081/service/rest/rundeck/maven/options/content` : return artifact stream
+  Parameters (all required) :
+  - `r` : repository ID to search in (null for searching in all indexed repositories)
+  - `g` : groupId of the artifacts to match
+  - `a` : artifactId of the artifacts to match
+  - `v` : artifact version, default value is latest version
+  - `c` : classifier of the artifacts to match ('sources', 'javadoc', etc)
+  - `p` : packaging of the artifacts to match ('jar', 'war', etc), default value is jar
+
+
+Note that if you want to retrieve the artifact from your Rundeck script, you can use content api, example is:
+`wget "http://NEXUS_HOST/service/siesta/rundeck/maven/options/content?r=reponame&g=${option.groupId}&a=${option.artifactId}&v=${option.version}" --content-disposition`
 
 # Add app as service
 Create */etc/systemd/system/appname.service*
