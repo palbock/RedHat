@@ -289,7 +289,7 @@ The following steps will enable nodes in a project for jobs.
  
  Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID.
  
- ### Rundeck plugin
+ ## Rundeck plugin
 * [Nexus3-Rundeck plugin info](https://docs.rundeck.com/plugins/nexus/2017/08/11/nexus3-options-provider.html)
 * [Nexus3-Rundeck plugin github](https://github.com/nongfenqi/nexus3-rundeck-plugin)
 * [Nexus3-Rundeck plugin github releases](https://github.com/nongfenqi/nexus3-rundeck-plugin/releases)
@@ -332,7 +332,7 @@ The plugin provides the following new HTTP resources :
   - `p` : packaging of the artifacts to match ('jar', 'war', etc), default value is jar
 
 
-Note that if you want to retrieve the artifact from your Rundeck script, you can use content api, example is:
+Note that if you want to retrieve the artifact from your Rundeck script, you can use content api, example is:  
 `wget "http://NEXUS_HOST/service/siesta/rundeck/maven/options/content?r=reponame&g=${option.groupId}&a=${option.artifactId}&v=${option.version}" --content-disposition`
 
 # Add app as service
