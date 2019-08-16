@@ -264,7 +264,7 @@ admin: MD5:<MD5 hash>,user,admin,architect,deploy,build
 ```
 
 ## Accessing Jenkins builds
-For Rundeck to access the Jenkins builds, Jenkins needs to use Matrix-based security with read-write permissions for anonymous users (or create a group for Rundeck user). After creating a job in Rundeck, add an 'Option' under 'Workflow', add `http://192.168.56.2:8080/plugin/rundeck/options/build?project=test-app&artifact=test-app.jar&limit=5&includeLastSuccessfulBuild=true&includeLastStableBuild=true` as a remoteURL.
+For Rundeck to access the Jenkins builds, Jenkins needs to use Matrix-based security with read-write permissions for anonymous users (or create a group for Rundeck user). After creating a job in Rundeck, add an 'Option' under 'Workflow', add `http://192.168.56.2:8080/plugin/rundeck/options/build?project=test-app&artifact=test-app.jar&limit=5&includeLastSuccessfulBuild=true&includeLastStableBuild=true` as a remoteURL. Options can then be used in scripts with the syntax: `var=@options.optionsName@`.
 
 ## Add a remote node and run a job on it
 The following steps will enable nodes in a project for jobs.
