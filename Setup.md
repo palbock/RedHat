@@ -40,7 +40,7 @@ firewall-cmd --reload
 ## Configuring *Jenkins* for use with Git and Maven
 Go to `192.168.56.2:8080/configureTools` and add the path to git and MAVEN_HOME to be able to fetch from remote git repo and execute maven commands via Jenkins.
 
-##Might be good to create Jenkins user and run as this user.##
+**Might be good to create Jenkins user and run as this user.**
 
 # Nexus installation
 
