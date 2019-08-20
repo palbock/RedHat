@@ -40,6 +40,8 @@ firewall-cmd --reload
 ## Configuring *Jenkins* for use with Git and Maven
 Go to `192.168.56.2:8080/configureTools` and add the path to git and MAVEN_HOME to be able to fetch from remote git repo and execute maven commands via Jenkins.
 
+##Might be good to create Jenkins user and run as this user.##
+
 # Nexus installation
 
 ## Download, extract and create user  
@@ -360,3 +362,32 @@ firewall-cmd --permanent --add-service=appname
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 ```
+
+# Ansible setup
+[Installation guide](https://hvops.com/articles/ansible-post-install/).  
+
+`vim /etc/ansible/ansible.cfg`
+*remote_user = user*  
+*remote_tmp = /tmp/*  
+
+`vim /etc/ansible/hosts`  
+*pal@192.168.56.3 ansible_user = root*  
+
+# Bitbucket setup
+[Installation guide](https://confluence.atlassian.com/bitbucketserver/install-bitbucket-server-on-linux-868976991.html). 
+
+***Open firewall
+```
+firewall-cmd --permanent --new-service=bitbucket
+firewall-cmd --permanent --service=bitbucket --set-short="bitbucket Service Ports"
+firewall-cmd --permanent --service=bitbucket --set-description="bitbucket service firewalld port exceptions"
+firewall-cmd --permanent --service=bitbucket --add-port=7990/tcp
+firewall-cmd --permanent --add-service=bitbucket
+firewall-cmd --zone=public --add-service=http --permanent
+firewall-cmd --reload
+```
+
+Must connect with Jenkins through SSH keypair. Generate keypair in `/var/lib/jenkins/.ssh` and use private key in Jenkins with Bitbucket username and public key in Bitbucket repo. Repository URL is `ssh://git@192.168.56.2:7999/tes/test-app.git`.  
+
+Use generic web hook plugin for Jenkins and Post-Receive WebHooks for Bitbucket.
+
