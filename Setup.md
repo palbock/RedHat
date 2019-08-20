@@ -364,7 +364,8 @@ firewall-cmd --reload
 ```
 
 # Ansible setup
-[Installation guide](https://hvops.com/articles/ansible-post-install/).  
+[Installation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).  
+[Connect to other machine](https://hvops.com/articles/ansible-post-install/).  
 
 `vim /etc/ansible/ansible.cfg`
 *remote_user = user*  
