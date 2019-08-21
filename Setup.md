@@ -289,7 +289,7 @@ The following steps will enable nodes in a project for jobs.
  
  ## Trigger Rundeck job from Jenkins
  
- Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID.
+ Use the Rundeck script in Jenkinsfile from test-app. Credentials must be added in Jenkins as well as a parameter specifying the Rundeck job ID. API token can be generated in Rundeck and used with the SSH user + secret text credential in Jenkins.
  
  ## Rundeck plugin
 * [Nexus3-Rundeck plugin info](https://docs.rundeck.com/plugins/nexus/2017/08/11/nexus3-options-provider.html)
