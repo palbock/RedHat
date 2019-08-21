@@ -1,0 +1,17 @@
+@startuml
+autonumber
+collections Code
+control Bitbucket
+entity Jenkins
+entity SonarQube
+database Nexus
+entity Local
+entity Rundeck
+Code -> Bitbucket: Push
+Bitbucket -> Jenkins: Checkout from SCM
+Jenkins -> Jenkins: Build
+Jenkins -> SonarQube: Testing
+Jenkins -> Nexus: Upload artifact
+Nexus -> Local: Download Latest artifact
+Jenkins -> Rundeck: Restart app
+@enduml
