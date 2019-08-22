@@ -4,6 +4,8 @@ Currently the script for downloading latest artifact uses username and password 
 ## Update credentials in Rundeck
 Currently Jenkins stores Rundeck credentials as username/password. Would be preferable to use secret key or similar. Investigate if possible.
 
+Credential 'rundeck-pw' can be stored as an API token generated in Rundeck.
+
 ## Integrate Rundeck with Nexus  
 Currently the rollback job in Rundeck selects artifacts from Jenkins. It would be preferable to use Nexus instead as Nexus is a more
 reliable repository. The JSON file for Nexus artifacts can be accessed from the browser when logged into Nexus, but not from a Rundeck
