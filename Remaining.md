@@ -8,3 +8,6 @@ Currently Jenkins stores Rundeck credentials as username/password. Would be pref
 Currently the rollback job in Rundeck selects artifacts from Jenkins. It would be preferable to use Nexus instead as Nexus is a more
 reliable repository. The JSON file for Nexus artifacts can be accessed from the browser when logged into Nexus, but not from a Rundeck
 option (http://192.168.56.2:8081/service/rest/rundeck/maven/options/version?r=test-app&g=no.ahj&a=test-app&p=jar).
+
+## Notifications
+Setup email (or other) notification for when build is run/successful/failed.
