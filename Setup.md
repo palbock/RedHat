@@ -53,7 +53,7 @@ Add recipients
 ```
 Note that a system admin email must be set for Jenkins for this to work.
 
-Below code must be added to Jenkinsfile:  
+Example code for Jenkinsfile (pipeline script):  
 ```
 stage('Email') {
             steps{
