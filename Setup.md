@@ -40,6 +40,33 @@ firewall-cmd --reload
 ## Configuring *Jenkins* for use with Git and Maven
 Go to `192.168.56.2:8080/configureTools` and add the path to git and MAVEN_HOME to be able to fetch from remote git repo and execute maven commands via Jenkins.
 
+## Email notifications from Jenkins
+Install Email Extension Plugin for Jenkins. Go to Manage Jenkins -> Configure system and configure Extended Email Notification. Example setup for Gmail:  
+```
+SMTP server: smtp.gmail.com  
+Check Use SMTP authentication  
+User name: email account name  
+Password: email password (note: if 2FA is enabled an app password must be created for Jenkins)  
+Check Use SSL  
+SMTP Port: 465  
+Add recipients  
+```
+Note that a system admin email must be set for Jenkins for this to work.
+
+Below code must be added to Jenkinsfile:  
+```
+stage('Email') {
+            steps{
+                emailext(
+                body: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
+                //recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                to: '$DEFAULT_RECIPIENTS',
+                subject: 'Jenkins build'
+                )
+            }
+        }
+```
+
 **Might be good to create Jenkins user and run as this user.**
 
 # Nexus installation
