@@ -11,7 +11,7 @@ Currently the rollback job in Rundeck selects artifacts from Jenkins. It would b
 reliable repository. The JSON file for Nexus artifacts can be accessed from the browser when logged into Nexus, but not from a Rundeck
 option (http://192.168.56.2:8081/service/rest/rundeck/maven/options/version?r=test-app&g=no.ahj&a=test-app&p=jar).
 
-`curl -X GET "http://192.168.56.2:8081/service/rest/v1/search/assets?repository=test-app&maven.extension=jar" -H "accept: application/json"` gives a list of jars with downloadURL. Possible to combine with Rundeck somehow?
+`curl -X GET "http://192.168.56.2:8081/service/rest/v1/search/assets?repository=test-app&maven.extension=jar" -H "accept: application/json"` gives a list of jars with downloadURL. Possible to run script on server and set this as remote URL in Rundeck, then use downloadURL as options value for job?
 
 ## Notifications
 Setup email (or other) notification for when build is run/successful/failed.
