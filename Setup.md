@@ -349,7 +349,7 @@ firewall-cmd --reload
 
 # Ansible setup
 [Installation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).  
-[Connect to other machine](https://hvops.com/articles/ansible-post-install/). 
+[Connect to other machine](https://hvops.com/articles/ansible-post-install/).  
 [Tutorial](https://blog.ssdnodes.com/blog/step-by-step-ansible-guide/).
 
 `vim /etc/ansible/ansible.cfg`
