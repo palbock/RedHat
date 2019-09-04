@@ -141,7 +141,7 @@ The pipeline script has an element called 'credentialsId'. Go to `192.168.56.2:8
 "Nexus" and the username and password for the Nexus server.
 
 ## Downloading artifacts
-The script found at [here](https://github.com/adrianhj88/test-app/blob/master/Download-from-nexus-script) can be used to download the 
+The script found [here](https://github.com/adrianhj88/test-app/blob/master/Download-from-nexus-script) can be used to download the 
 latest .jar file from the Nexus repository.
 
 Make script executable from everywhere:  
