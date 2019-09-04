@@ -225,12 +225,17 @@ URL to `http://192.168.56.2:9000` and add the authentication token created earli
 Install the following list of plugins, and all the recommended plugins, for Jenkins.
 
 * Nexus Artifact Uploader
-*Nexus Platform Plugin
+* Nexus Platform Plugin
 * Pipeline
 * Pipeline Utility Steps
 * Publish Over SSH
 * SonarQube Scanner for Jenkins
 * SSH Plugin
+* Gogs plugin
+* Email extension
+* Bitbucket
+* Generic webhook trigger
+* Rundeck plugin
 
 # Jenkins pipeline
 
