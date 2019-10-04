@@ -37,7 +37,7 @@ firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 ```
 
-## Configuring *Jenkins* for use with Git and Maven
+## Configuring Jenkins for use with Git and Maven
 Go to `192.168.56.2:8080/configureTools` and add the path to git and MAVEN_HOME to be able to fetch from remote git repo and execute maven commands via Jenkins.
 
 ## Email notifications from Jenkins
